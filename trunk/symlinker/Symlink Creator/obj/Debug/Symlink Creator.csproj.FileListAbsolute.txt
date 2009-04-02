@@ -1,0 +1,14 @@
+D:\Alejandro\Documents\Visual Studio 2008\Projects\WindowsFormsApplication1\Symlink Creator\obj\Debug\ResolveAssemblyReference.cache
+D:\Alejandro\Documents\Visual Studio 2008\Projects\WindowsFormsApplication1\Symlink Creator\obj\Debug\Symlink_Creator.Form1.resources
+D:\Alejandro\Documents\Visual Studio 2008\Projects\WindowsFormsApplication1\Symlink Creator\obj\Debug\Symlink_Creator.Properties.Resources.resources
+D:\Alejandro\Documents\Visual Studio 2008\Projects\WindowsFormsApplication1\Symlink Creator\obj\Debug\Symlink Creator.csproj.GenerateResource.Cache
+D:\Alejandro\Documents\Visual Studio 2008\Projects\WindowsFormsApplication1\Symlink Creator\bin\Debug\Symlink Creator.exe
+D:\Alejandro\Documents\Visual Studio 2008\Projects\WindowsFormsApplication1\Symlink Creator\bin\Debug\Symlink Creator.pdb
+D:\Alejandro\Documents\Visual Studio 2008\Projects\WindowsFormsApplication1\Symlink Creator\obj\Debug\Symlink Creator.exe
+D:\Alejandro\Documents\Visual Studio 2008\Projects\WindowsFormsApplication1\Symlink Creator\obj\Debug\Symlink Creator.pdb
+D:\Alejandro\Documents\Visual Studio 2008\Projects\WindowsFormsApplication1\Symlink Creator\bin\Debug\info.png
+D:\Alejandro\Documents\Visual Studio 2008\Projects\WindowsFormsApplication1\Symlink Creator\bin\Debug\Symlink Creator.exe.manifest
+D:\Alejandro\Documents\Visual Studio 2008\Projects\WindowsFormsApplication1\Symlink Creator\bin\Debug\Symlink Creator.application
+D:\Alejandro\Documents\Visual Studio 2008\Projects\WindowsFormsApplication1\Symlink Creator\obj\Debug\Symlink Creator.exe.manifest
+D:\Alejandro\Documents\Visual Studio 2008\Projects\WindowsFormsApplication1\Symlink Creator\obj\Debug\Symlink Creator.application
+D:\Alejandro\Documents\Visual Studio 2008\Projects\WindowsFormsApplication1\Symlink Creator\bin\Debug\Symlink Creator.exe.config
