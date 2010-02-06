@@ -30,8 +30,13 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
+    <SupportUrl>http://code.google.com/p/symlinker/</SupportUrl>
+    <ErrorReportUrl>http://code.google.com/p/symlinker/issues/list</ErrorReportUrl>
+    <TargetCulture>en</TargetCulture>
+    <ProductName>Symlink Creator</ProductName>
+    <PublisherName>Symlink Creator</PublisherName>
     <AutorunEnabled>true</AutorunEnabled>
-    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationRevision>4</ApplicationRevision>
     <ApplicationVersion>1.1.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>

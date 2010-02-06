@@ -32,7 +32,7 @@ namespace Symlink_Creator
         // Manages the action of the "info" image
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("© 2009 Alejandro Mora Díaz \n Version: 1.1.0.0 \nThanks to Microsoft for the use of their shortcut arrow :)", "About", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("© 2010 Alejandro Mora Díaz \n Version: 1.1.0.3 \nThanks to Microsoft for the use of their shortcut arrow :)", "About", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         // Manages the link explore button
