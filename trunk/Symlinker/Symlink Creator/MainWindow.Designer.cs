@@ -151,6 +151,7 @@
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(148, 21);
             this.comboBox1.TabIndex = 3;
+            this.comboBox1.MouseHover += new System.EventHandler(this.comboBox1_MouseHover);
             // 
             // button2
             // 
@@ -218,6 +219,7 @@
             this.TypeSelector.Name = "TypeSelector";
             this.TypeSelector.Size = new System.Drawing.Size(176, 21);
             this.TypeSelector.TabIndex = 1;
+            this.TypeSelector.MouseHover += new System.EventHandler(this.TypeSelector_MouseHover);
             this.TypeSelector.SelectedIndexChanged += new System.EventHandler(this.TypeSelector_SelectedIndexChanged);
             // 
             // MainWindow
