@@ -11,10 +11,15 @@ using System.Diagnostics;
 
 namespace Symlink_Creator
 {
+    ///<summary>
+    /// This class manages the window
+    ///</summary>
     public partial class MainWindow : Form
     {
 
         private bool _folder;
+        private ToolTip _tip = new ToolTip();
+
 
         /// <summary>
         /// Constructor
@@ -22,17 +27,17 @@ namespace Symlink_Creator
         public MainWindow()
         {
             InitializeComponent();
+            _tip.IsBalloon = true;
             comboBox1.SelectedIndex = 0;
             TypeSelector.SelectedIndex = 0;
         }
-
 
         #region Events
 
         // Manages the action of the "info" image
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("© 2010 Alejandro Mora Díaz \n Version: 1.1.0.3 \nThanks to Microsoft for the use of their shortcut arrow :)", "About", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("© 2010 Alejandro Mora Díaz \n Version: 1.1.0.5 \n email: alejandro@plexip.com \n Thanks to Microsoft for the use of their shortcut arrow :)", "About", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         // Manages the link explore button
@@ -45,6 +50,7 @@ namespace Symlink_Creator
         // Manages the explore button
         private void button2_Click(object sender, EventArgs e)
         {
+            // if _folder is true the folder browser will be shown
             if (_folder)
             {
                 folderBrowser.ShowDialog();
@@ -57,17 +63,18 @@ namespace Symlink_Creator
             }
         }
 
-
         private void TypeSelector_SelectedIndexChanged(object sender, EventArgs e)
         {
             Switcher();
         }
 
-
         private void button3_Click(object sender, EventArgs e)
         {
             CreateLink();
         }
+
+
+        #endregion
 
 
         /// <summary>
@@ -123,11 +130,12 @@ namespace Symlink_Creator
                 MessageBox.Show("Please fill all the required info", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        #endregion
-
+        /// <summary>
+        /// This method allows to switch modes between file or folder symlinks
+        /// </summary>
         private void Switcher()
         {
-            if (_folder == false)
+            if (TypeSelector.SelectedIndex == 0)
             {
                 groupBox1.Text = "Link Folder";
                 groupBox2.Text = "Destination Folder";
@@ -175,5 +183,21 @@ namespace Symlink_Creator
                     return "";
             }
         }
+
+        private void TypeSelector_MouseHover(object sender, EventArgs e)
+        {
+            _tip.ToolTipIcon = ToolTipIcon.Info;
+            _tip.UseAnimation = true;
+            _tip.UseFading = true;
+            _tip.AutoPopDelay = 10000;
+            _tip.ToolTipTitle = "Symbolic Link type selector";
+            _tip.SetToolTip(TypeSelector, "With this option you can choose between creating file symbolic links; \nthis is using a file to point to another file, or folder symbolic links; this \nis using folders that point to other folders");
+        }
+
+        private void comboBox1_MouseHover(object sender, EventArgs e)
+        {
+            _tip.SetToolTip(comboBox1,"lol");
+        }
+
     }
 }
