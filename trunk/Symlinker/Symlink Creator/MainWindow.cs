@@ -18,7 +18,7 @@ namespace Symlink_Creator
     {
 
         private bool _folder;
-        private ToolTip _tip = new ToolTip();
+        private readonly ToolTip _tip = new ToolTip();
 
 
         /// <summary>
@@ -37,8 +37,11 @@ namespace Symlink_Creator
         // Manages the action of the "info" image
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("© 2010 Alejandro Mora Díaz \n Version: 1.1.0.5 \n email: alejandro@plexip.com \n Thanks to Microsoft for the use of their shortcut arrow :)", "About", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("© 2010 Alejandro Mora Díaz \n Version: 1.1.0.5 \n e-mail: amora@plexip.com \n Thanks to Microsoft for the use of their shortcut arrow :)", "About", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
+
+
+
 
         // Manages the link explore button
         private void button1_Click(object sender, EventArgs e)
@@ -63,6 +66,7 @@ namespace Symlink_Creator
             }
         }
 
+        // manages the type selector combobox
         private void TypeSelector_SelectedIndexChanged(object sender, EventArgs e)
         {
             Switcher();
@@ -73,6 +77,27 @@ namespace Symlink_Creator
             CreateLink();
         }
 
+
+        private void TypeSelector_MouseHover(object sender, EventArgs e)
+        {
+            _tip.ToolTipIcon = ToolTipIcon.Info;
+            _tip.UseAnimation = true;
+            _tip.UseFading = true;
+            _tip.AutoPopDelay = 10000;
+            _tip.ToolTipTitle = "Symbolic Link type selector";
+            _tip.SetToolTip(TypeSelector, "With this option you can choose between creating file symbolic links; \nthis is using a file to point to another file, or folder symbolic links; this \nis using folders that point to other folders");
+        }
+
+        private void comboBox1_MouseHover(object sender, EventArgs e)
+        {
+            _tip.ToolTipIcon = ToolTipIcon.Info;
+            _tip.UseAnimation = true;
+            _tip.UseFading = true;
+            _tip.AutoPopDelay = 5000;
+            _tip.ToolTipTitle = "Symbolic Link types";
+            _tip.SetToolTip(comboBox1, "This option allows you to select the style of your symbolic link, either\nyou choose to use symbolic links, hard links or directory junctions");
+        }
+        
 
         #endregion
 
@@ -184,20 +209,6 @@ namespace Symlink_Creator
             }
         }
 
-        private void TypeSelector_MouseHover(object sender, EventArgs e)
-        {
-            _tip.ToolTipIcon = ToolTipIcon.Info;
-            _tip.UseAnimation = true;
-            _tip.UseFading = true;
-            _tip.AutoPopDelay = 10000;
-            _tip.ToolTipTitle = "Symbolic Link type selector";
-            _tip.SetToolTip(TypeSelector, "With this option you can choose between creating file symbolic links; \nthis is using a file to point to another file, or folder symbolic links; this \nis using folders that point to other folders");
-        }
-
-        private void comboBox1_MouseHover(object sender, EventArgs e)
-        {
-            _tip.SetToolTip(comboBox1,"lol");
-        }
 
     }
 }

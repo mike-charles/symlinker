@@ -73,7 +73,6 @@
             // folderBrowser
             // 
             this.folderBrowser.Description = "Please select a folder";
-            this.folderBrowser.RootFolder = System.Environment.SpecialFolder.MyComputer;
             this.folderBrowser.ShowNewFolderButton = false;
             // 
             // button1
@@ -219,8 +218,8 @@
             this.TypeSelector.Name = "TypeSelector";
             this.TypeSelector.Size = new System.Drawing.Size(176, 21);
             this.TypeSelector.TabIndex = 1;
-            this.TypeSelector.MouseHover += new System.EventHandler(this.TypeSelector_MouseHover);
             this.TypeSelector.SelectedIndexChanged += new System.EventHandler(this.TypeSelector_SelectedIndexChanged);
+            this.TypeSelector.MouseHover += new System.EventHandler(this.TypeSelector_MouseHover);
             // 
             // MainWindow
             // 
