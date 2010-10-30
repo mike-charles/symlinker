@@ -7,11 +7,11 @@ using System.Resources;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Symlink Creator")]
-[assembly: AssemblyDescription("Symbolic link creator")]
+[assembly: AssemblyDescription("Symbolic link creator app")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("PlexIP Corp")]
+[assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Symlink Creator")]
-[assembly: AssemblyCopyright("Copyright © PlexIP Corp 2009")]
+[assembly: AssemblyCopyright("Copyright © Alejandro Mora 2010")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -33,6 +33,6 @@ using System.Resources;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.1.0.0")]
-[assembly: AssemblyFileVersion("1.1.0.0")]
+[assembly: AssemblyVersion("1.1.1.0")]
+[assembly: AssemblyFileVersion("1.1.1.0")]
 [assembly: NeutralResourcesLanguageAttribute("en")]

@@ -1,13 +1,9 @@
 ﻿using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
 using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using System.Windows.Forms;
+using Symlink_Creator.Properties;
 
 namespace Symlink_Creator
 {
@@ -16,9 +12,8 @@ namespace Symlink_Creator
     ///</summary>
     public partial class MainWindow : Form
     {
-
-        private bool _folder;
         private readonly ToolTip _tip = new ToolTip();
+        private bool _folder;
 
 
         /// <summary>
@@ -37,11 +32,11 @@ namespace Symlink_Creator
         // Manages the action of the "info" image
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("© 2010 Alejandro Mora Díaz \n Version: 1.1.0.5 \n e-mail: amora@plexip.com \n Thanks to Microsoft for the use of their shortcut arrow :)", "About", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            var version = System.Deployment.Application.ApplicationDeployment.CurrentDeployment.CurrentVersion;
+            MessageBox.Show(
+                "© 2010 Alejandro Mora Díaz \n Version: "+version+" \n e-mail: amora@plexip.com \n Thanks to Microsoft for the use of their shortcut arrow :)",
+                "About", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
-
-
-
 
         // Manages the link explore button
         private void button1_Click(object sender, EventArgs e)
@@ -66,18 +61,21 @@ namespace Symlink_Creator
             }
         }
 
-        // manages the type selector combobox
-        private void TypeSelector_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            Switcher();
-        }
-
+        // Manages the create link button
         private void button3_Click(object sender, EventArgs e)
         {
             CreateLink();
         }
 
 
+        // manages the type selector combobox
+        private void TypeSelector_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Switcher();
+        }
+
+
+        // Manages de type selector mouse hover event
         private void TypeSelector_MouseHover(object sender, EventArgs e)
         {
             _tip.ToolTipIcon = ToolTipIcon.Info;
@@ -85,74 +83,98 @@ namespace Symlink_Creator
             _tip.UseFading = true;
             _tip.AutoPopDelay = 10000;
             _tip.ToolTipTitle = "Symbolic Link type selector";
-            _tip.SetToolTip(TypeSelector, "With this option you can choose between creating file symbolic links; \nthis is using a file to point to another file, or folder symbolic links; this \nis using folders that point to other folders");
+            _tip.SetToolTip(TypeSelector,
+                            "With this option you can choose between creating file symbolic links; \nthis is using a file to point to another file, or folder symbolic links; this \nis using folders that point to other folders");
         }
 
-        private void comboBox1_MouseHover(object sender, EventArgs e)
+        private void ComboBox1MouseHover(object sender, EventArgs e)
         {
             _tip.ToolTipIcon = ToolTipIcon.Info;
             _tip.UseAnimation = true;
             _tip.UseFading = true;
             _tip.AutoPopDelay = 5000;
             _tip.ToolTipTitle = "Symbolic Link types";
-            _tip.SetToolTip(comboBox1, "This option allows you to select the style of your symbolic link, either\nyou choose to use symbolic links, hard links or directory junctions");
+            _tip.SetToolTip(comboBox1,
+                            "This option allows you to select the style of your symbolic link, either\nyou choose to use symbolic links, hard links or directory junctions.\n use symbolic links as a default");
         }
-        
 
         #endregion
-
 
         /// <summary>
         /// Creates the link if the conditions are met
         /// </summary>
         private void CreateLink()
         {
-            if (textBox1.Text != "" && textBox3.Text != "" && textBox3.Text != "")// Everything need to be filled...
-                if (_folder && Directory.Exists(textBox1.Text) && Directory.Exists(textBox3.Text)) // Ask if the folders exist
-                {
-                    var link = "\"" + textBox1.Text + "\\" + textBox2.Text + "\" "; // concatenates the link name with the folder name and then it adds a pair of ", to allow using directories with spaces..
-
-                    var directories = Directory.GetDirectories(textBox1.Text); // gets the folders in the selected directory
-                    if (directories.Any(e => e.Split('\\').Last().Equals(textBox2.Text))) // looks for folders with the same name of the link name
+            try
+            {
+                if (textBox1.Text != "" && textBox2.Text != "" && textBox3.Text != "")
+                    // Everything need to be filled...
+                    if (_folder && Directory.Exists(textBox1.Text) && Directory.Exists(textBox3.Text))
+                        // Ask if the folders exist
                     {
-                        // if found the program ask the user if he wants to delete the folder that is already there
-                        var answer = MessageBox.Show("The link name you are using already exists in the selected directory, would you like to DELETE the folder and then create a new link?", "Folder already there...", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                        if (answer == DialogResult.Yes)
-                        {
-                            // if the answer is yes, the folder is deleted in order to create a new one
-                            var dir2Delete = directories.First(e => e.Split('\\').Last().Equals(textBox2.Text));
-                            Directory.Delete(dir2Delete);
-                            SendCommand(link);
-                            return;
-                        }
-                        MessageBox.Show("Link creation aborted", "Aborted Operation", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                    }
-                    SendCommand(link);
-                }
-                else if (Directory.Exists(textBox1.Text) && File.Exists(textBox3.Text))
-                {
-                    // same thing as above... it just deletes files instead of folders
-                    var link = "\"" + textBox1.Text + "\\" + textBox2.Text + "\" ";
+                        string link = "\"" + textBox1.Text + "\\" + textBox2.Text + "\" ";
+                            // concatenates the link name with the folder name and then it adds a pair of ", to allow using directories with spaces..
 
-                    var files = Directory.GetFiles(textBox1.Text);
-                    if (files.Any(e => e.Split('\\').Last().Equals(textBox2.Text)))
-                    {
-                        var answer = MessageBox.Show("The link name you are using already exists in the selected directory, would you like to DELETE the file and then create a new link?", "File already there...", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                        if (answer == DialogResult.Yes)
+                        string[] directories = Directory.GetDirectories(textBox1.Text);
+                            // gets the folders in the selected directory
+                        if (directories.Any(e => e.Split('\\').Last().Equals(textBox2.Text)))
+                            // looks for folders with the same name of the link name
                         {
-                            var file2Delete = files.First(e => e.Split('\\').Last().Equals(textBox2.Text));
-                            File.Delete(file2Delete);
-                            SendCommand(link);
-                            return;
+                            // if found the program ask the user if he wants to delete the folder that is already there
+                            DialogResult answer = MessageBox.Show(Resources.DialogFolderExists,
+                                                                  Resources.DialogFolderExistsDialog,
+                                                                  MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                            if (answer == DialogResult.Yes)
+                            {
+                                // if the answer is yes, the folder is deleted in order to create a new one
+                                string dir2Delete = directories.First(e => e.Split('\\').Last().Equals(textBox2.Text));
+                                Directory.Delete(dir2Delete);
+                                SendCommand(link);
+                                return;
+                            }
+                            MessageBox.Show(Resources.LinkCreationAborted, Resources.LinkCreationAbortedWarning,
+                                            MessageBoxButtons.OK, MessageBoxIcon.Stop);
                         }
-                        MessageBox.Show("Link creation aborted", "Aborted Operation", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                        else
+                        {
+                            SendCommand(link);
+                        }
                     }
-                    SendCommand(link);
-                }
+                    else if (Directory.Exists(textBox1.Text) && File.Exists(textBox3.Text))
+                    {
+                        // same thing as above... it just deletes files instead of folders
+                        string link = "\"" + textBox1.Text + "\\" + textBox2.Text + "\" ";
+
+                        string[] files = Directory.GetFiles(textBox1.Text);
+                        if (files.Any(e => e.Split('\\').Last().Equals(textBox2.Text)))
+                        {
+                            DialogResult answer = MessageBox.Show(Resources.DialogDeleteFile,
+                                                                  Resources.DialogDeleteFileWarning,
+                                                                  MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                            if (answer == DialogResult.Yes)
+                            {
+                                string file2Delete = files.First(e => e.Split('\\').Last().Equals(textBox2.Text));
+                                File.Delete(file2Delete);
+                                SendCommand(link);
+                                return;
+                            }
+                            MessageBox.Show(Resources.LinkCreationAborted, Resources.LinkCreationAbortedWarning,
+                                            MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                        }
+                        else
+                        {
+                            SendCommand(link);
+                        }
+                    }
+                    else
+                        MessageBox.Show(Resources.FilesOrFolderNotExists, "Error", MessageBoxButtons.OK,
+                                        MessageBoxIcon.Warning);
                 else
-                    MessageBox.Show("One of the directories/files does not exists, please provide valid directories/files", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            else
-                MessageBox.Show("Please fill all the required info", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(Resources.FillBlanks, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception)
+            {
+            }
         }
 
         /// <summary>
@@ -164,6 +186,7 @@ namespace Symlink_Creator
             {
                 groupBox1.Text = "Link Folder";
                 groupBox2.Text = "Destination Folder";
+                label2.Text = "Now give a name to the link:";
                 label3.Text = "Please select the path to the real folder you want to link:";
                 _folder = true;
             }
@@ -171,6 +194,7 @@ namespace Symlink_Creator
             {
                 groupBox1.Text = "Link File";
                 groupBox2.Text = "Destination File";
+                label2.Text = "Now give a name to your file:";
                 label3.Text = "Please select the path to the real file you want to link:";
                 _folder = false;
             }
@@ -180,15 +204,30 @@ namespace Symlink_Creator
         /// This method build a string using the paramethers provided by the user, after that, it start a new
         /// cmd.exe process with the string just built.
         /// </summary>
-        /// <param name="link"></param>
-        public void SendCommand(string link)
+        /// <param name="link">Path to the place you want your symlink</param>
+        private void SendCommand(string link)
         {
-            var target = "\"" + textBox3.Text + "\""; // concatenates a pair of "", to provide
-            var typeLink = ComboBoxSelection();
-            var directory = _folder ? "/D " : "";
-            var stringCommand = "/c mklink " + directory + typeLink + link + target;
-            Process.Start("cmd", stringCommand);
-            MessageBox.Show("Link successfully created", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            try
+            {
+                string target = "\"" + textBox3.Text + "\"";
+                    // concatenates a pair of "", this is to make folders with spaces to work
+                string typeLink = ComboBoxSelection();
+                string directory = _folder ? "/D " : "";
+                string stringCommand = "/c mklink " + directory + typeLink + link + target;
+                var processStartInfo = new ProcessStartInfo
+                                           {
+                                               FileName = "cmd",
+                                               Arguments = stringCommand,
+                                               CreateNoWindow = true
+                                           };
+                Process.Start(processStartInfo);
+                MessageBox.Show(Resources.LinkSuccessfullyCreated, "Success", MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show(Resources.CmdNotFound, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
 
@@ -208,7 +247,5 @@ namespace Symlink_Creator
                     return "";
             }
         }
-
-
     }
 }
