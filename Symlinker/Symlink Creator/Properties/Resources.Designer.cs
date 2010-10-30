@@ -60,10 +60,107 @@ namespace Symlink_Creator.Properties {
             }
         }
         
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot find the file needed to create links, the creation stopped.
+        /// </summary>
+        internal static string CmdNotFound {
+            get {
+                return ResourceManager.GetString("CmdNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The link name you are using already exists in the selected directory, would you like to DELETE the file and then create a new link?.
+        /// </summary>
+        internal static string DialogDeleteFile {
+            get {
+                return ResourceManager.GetString("DialogDeleteFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File already there....
+        /// </summary>
+        internal static string DialogDeleteFileWarning {
+            get {
+                return ResourceManager.GetString("DialogDeleteFileWarning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The link name you are using already exists in the selected directory, would you like to DELETE the folder and then create a new link?.
+        /// </summary>
+        internal static string DialogFolderExists {
+            get {
+                return ResourceManager.GetString("DialogFolderExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Folder already there....
+        /// </summary>
+        internal static string DialogFolderExistsDialog {
+            get {
+                return ResourceManager.GetString("DialogFolderExistsDialog", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to One of the directories/files does not exists, please provide valid directories/files.
+        /// </summary>
+        internal static string FilesOrFolderNotExists {
+            get {
+                return ResourceManager.GetString("FilesOrFolderNotExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please fill all the blanks spaces with the indicated info.
+        /// </summary>
+        internal static string FillBlanks {
+            get {
+                return ResourceManager.GetString("FillBlanks", resourceCulture);
+            }
+        }
+        
+        internal static System.Drawing.Icon icon {
+            get {
+                object obj = ResourceManager.GetObject("icon", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap info {
             get {
                 object obj = ResourceManager.GetObject("info", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Link creation aborted.
+        /// </summary>
+        internal static string LinkCreationAborted {
+            get {
+                return ResourceManager.GetString("LinkCreationAborted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Aborted Operation.
+        /// </summary>
+        internal static string LinkCreationAbortedWarning {
+            get {
+                return ResourceManager.GetString("LinkCreationAbortedWarning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Link successfully created.
+        /// </summary>
+        internal static string LinkSuccessfullyCreated {
+            get {
+                return ResourceManager.GetString("LinkSuccessfullyCreated", resourceCulture);
             }
         }
     }
